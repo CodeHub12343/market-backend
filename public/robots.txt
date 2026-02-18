@@ -1,0 +1,47 @@
+# ✅ Robots.txt for University Marketplace
+# Controls which pages search engines can crawl
+
+User-agent: *
+Allow: /
+
+# Disallow sensitive paths
+Disallow: /admin
+Disallow: /api/
+Disallow: /login
+Disallow: /signup
+Disallow: /private
+Disallow: /checkout
+Disallow: /*?*sort=
+Disallow: /*?*filter=
+Disallow: /*.json$
+Disallow: /edit
+Disallow: /new
+
+# Allow major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Rate limiting for aggressive bots
+User-agent: AhrefsBot
+Crawl-delay: 10
+Request-rate: 1/10s
+
+User-agent: SemrushBot
+Crawl-delay: 10
+Request-rate: 1/10s
+
+User-agent: MJ12bot
+Crawl-delay: 5
+Request-rate: 1/5s
+
+# Sitemaps
+Sitemap: http://localhost:3000/sitemap.xml
