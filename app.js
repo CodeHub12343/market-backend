@@ -75,6 +75,7 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:3000',
   'https://campusly.vercel.app',
+  'https://campusly-mu.vercel.app',
   'http://127.0.0.1:3000',
   'http://10.0.80.42:3000',
   'http://192.168.248.148:3000'
