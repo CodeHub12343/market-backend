@@ -15,9 +15,11 @@ const globalErrorHandler = require('./controllers/errorController');
 
 const safeRequire = (p) => {
   try {
-    return require(p);
+    const module = require(p);
+    console.log(`✅ Successfully loaded: ${p}`);
+    return module;
   } catch (e) {
-    console.error(`Failed to load module ${p}:`, e && e.message ? e.message : e);
+    console.error(`❌ Failed to load module ${p}:`, e && e.message ? e.message : e);
     throw e;
   }
 };
@@ -207,12 +209,19 @@ app.use((req, res, next) => {
 
 // 2) ROUTES
 
+// Health check endpoint
+app.get('/api/v1/health', (req, res) => {
+  res.status(200).json({ status: 'ok', message: 'Server is running' });
+});
+
 // Admin Dashboard
 app.use('/api/v1/admin', adminRouter); // admin management endpoints (50+)
 
 // Core User & Auth
-app.use('/api/v1/auth', authRouter);        // signup, login, password reset 
+app.use('/api/v1/auth', authRouter);        // signup, login, password reset
+console.log('🔐 Auth routes mounted at /api/v1/auth:', authRouter ? '✅' : '❌ UNDEFINED');
 app.use('/api/v1/users', userRouter);       // user profile, campus, roles
+console.log('👤 User routes mounted at /api/v1/users:', userRouter ? '✅' : '❌ UNDEFINED');
 app.use('/api/v1/profile', require('./routes/profileRoutes')); // profile management
 app.use('/api/v1/search', searchRouter);    // global search & filtering
 
